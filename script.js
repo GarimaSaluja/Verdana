@@ -157,7 +157,7 @@ async function fetchAIPlant(query) {
     const res = await fetch("https://api.anthropic.com/v1/messages", {
       method: "POST", headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" },
       body: JSON.stringify({
-        model: "claude-sonnet-4-20250514", max_tokens: 1000,
+        model: "claude-opus-4-5", max_tokens: 1000,
         messages: [{
           role: "user", content: `You are a botanist. The user searched for "${query}" in a plant encyclopedia. Identify the best matching plant and return ONLY valid JSON (no markdown, no backticks):
 {"name":"full common name","scientific":"scientific name","emoji":"single most fitting emoji","difficulty":"easy/medium/hard","light":"low_light/medium/bright_indirect/bright_direct","water":"watering frequency","humidity":"Low/Medium/High/Very High","soil":"soil type","fertilizer":"fertilizer schedule","temp":"temperature range in °C","category":"tropical/succulent/flowering/trailing/herb/other","tags":["tag1","tag2","tag3"],"bg":"linear-gradient(135deg,#hex1,#hex2) using nature/plant appropriate colors","description":"2 sentence description","tips":["tip1","tip2","tip3","tip4"],"warning":"toxicity or caution if any, else empty string"}` }]
@@ -275,7 +275,7 @@ async function getCareGuide() {
       ]
     }] : [{ role: "user", content: `Suggest a popular easy houseplant. Respond ONLY in valid JSON: {"name":"...","scientific":"...","emoji":"...","confidence":"Low","description":"...","watering":"...","light":"...","humidity":"...","soil":"...","fertilizer":"...","temperature":"...","tips":["...","...","...","..."],"warning":"..."}` }];
 
-    const res = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" }, body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, messages }) });
+    const res = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" }, body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: 1000, messages }) });
     const data = await res.json();
     const plant = JSON.parse(data.content.map(c => c.text || '').join('').replace(/```json|```/g, '').trim());
     identifiedPlantData = plant;
@@ -455,7 +455,7 @@ async function sendChatMessage() {
   chatHistory.push({ role: 'user', content: msg });
   const loadId = appendLoadingMsg();
   try {
-    const res = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" }, body: JSON.stringify({ model: "claude-sonnet-4-20250514", max_tokens: 1000, system: `You are Verdana AI, a friendly plant care expert. Help with plant identification, care, troubleshooting, watering, soil, and gardening tips. Be concise and warm. Use plant emojis. User's plants: ${myPlants.map(p => p.name).join(', ') || 'none yet'}.`, messages: chatHistory.slice(-10) }) });
+    const res = await fetch("https://api.anthropic.com/v1/messages", { method: "POST", headers: { "Content-Type": "application/json", "x-api-key": ANTHROPIC_API_KEY, "anthropic-version": "2023-06-01", "anthropic-dangerous-direct-browser-access": "true" }, body: JSON.stringify({ model: "claude-opus-4-5", max_tokens: 1000, system: `You are Verdana AI, a friendly plant care expert. Help with plant identification, care, troubleshooting, watering, soil, and gardening tips. Be concise and warm. Use plant emojis. User's plants: ${myPlants.map(p => p.name).join(', ') || 'none yet'}.`, messages: chatHistory.slice(-10) }) });
     const data = await res.json();
     const reply = data.content.map(c => c.text || '').join('');
     removeLoadingMsg(loadId); appendChatMsg('bot', reply);
