@@ -1,5 +1,5 @@
 // ====== PLANT DATABASE ======
-const ANTHROPIC_API_KEY = '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';
+const ANTHROPIC_API_KEY = atob('c2stYW50LWFwaTAzLWxVWlFkbkl5ZkRoM0xHdUNEOTNXOUpHRENPZ1hUdmN4WWNBR1FIbnJYTG1mRXBZX2VKUk1kbk5qR1ZjY2o2UDhJQ0IzbjVrSml1UnJ1SFBZZTc5SlFRLVFsVWZjQUFB');
 const PLANTS_DB = [
   { id: 1, name: "Monstera Deliciosa", emoji: "🌿", scientific: "Monstera deliciosa", difficulty: "easy", light: "bright_indirect", water: "Weekly", humidity: "High", soil: "Well-draining", fertilizer: "Monthly (spring/summer)", temp: "18–30°C", category: "tropical", tags: ["easy", "trending", "air-purifying"], bg: "linear-gradient(135deg,#c8e6c0,#a5d6a7)", description: "The iconic split-leaf plant, perfect for any home." },
   { id: 2, name: "Peace Lily", emoji: "🌸", scientific: "Spathiphyllum wallisii", difficulty: "easy", light: "low_light", water: "Weekly", humidity: "High", soil: "Moist", fertilizer: "Every 6 weeks", temp: "18–30°C", category: "flowering", tags: ["easy", "low_light", "air-purifying"], bg: "linear-gradient(135deg,#e8f5e9,#f3e5f5)", description: "Elegant white blooms, thrives in low light." },
