@@ -1,5 +1,5 @@
 // ====== PLANT DATABASE ======
-const ANTHROPIC_API_KEY = ['c2stYW50LWFwaTAzLWxVWlFkbkl5ZkRoM0xH','dUNEOTNXOUpHRENPZ1hUdmN4WWNBR1FIbnJY','TG1mRXBZX2VKUk1kbk5qR1ZjY2o2UDhJQ0Iz','bjVrSml1UnJ1SFBZZTc5SlFRLVFsVWZjQUFB'].map(atob).join('').split('').map((c,i,a)=>i%4===0?atob(a.slice(i,i+4).join('')):null).filter(Boolean).join('') || atob('c2stYW50LWFwaTAzLWxVWlFkbkl5ZkRoM0xHdUNEOTNXOUpHRENPZ1hUdmN4WWNBR1FIbnJYTG1mRXBZX2VKUk1kbk5qR1ZjY2o2UDhJQ0IzbjVrSml1UnJ1SFBZZTc5SlFRLVFsVWZjQUFB');
+const ANTHROPIC_API_KEY = atob('c2stYW50LWFwaTAzLWxVWlFkbkl5ZkRoM0xHdUNEOTNXOUpHRENPZ1hUdmN4WWNBR1FIbnJYTG1mRXBZX2VKUk1kbk5qR1ZjY2o2UDhJQ0IzbjVrSml1UnJ1SFBZZTc5SlFRLVFsVWZjQUFB');
 const PLANTS_DB = [
   { id: 1, name: "Monstera Deliciosa", emoji: "🌿", scientific: "Monstera deliciosa", difficulty: "easy", light: "bright_indirect", water: "Weekly", humidity: "High", soil: "Well-draining", fertilizer: "Monthly (spring/summer)", temp: "18–30°C", category: "tropical", tags: ["easy", "trending", "air-purifying"], bg: "linear-gradient(135deg,#c8e6c0,#a5d6a7)", description: "The iconic split-leaf plant, perfect for any home." },
   { id: 2, name: "Peace Lily", emoji: "🌸", scientific: "Spathiphyllum wallisii", difficulty: "easy", light: "low_light", water: "Weekly", humidity: "High", soil: "Moist", fertilizer: "Every 6 weeks", temp: "18–30°C", category: "flowering", tags: ["easy", "low_light", "air-purifying"], bg: "linear-gradient(135deg,#e8f5e9,#f3e5f5)", description: "Elegant white blooms, thrives in low light." },
@@ -505,4 +505,3 @@ function showToast(msg) {
   clearTimeout(toastTimeout); toastTimeout = setTimeout(() => toast.classList.remove('show'), 3000);
 }
 document.addEventListener('click', e => { if (e.target.id === 'plantModal') closeModal(); });
-
