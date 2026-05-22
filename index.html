@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8"/>
+  <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Verdana — Plant Care Studio</title>
   <link rel="stylesheet" href="style.css"/>
@@ -28,8 +28,14 @@
       <div class="login-card" id="loginCard">
         <h2>Welcome Back</h2>
         <p class="login-sub">Sign in to your garden sanctuary</p>
-        <div class="input-group"><i class="fa fa-envelope"></i><input type="email" id="loginEmail" placeholder="your@email.com"/></div>
-        <div class="input-group"><i class="fa fa-lock"></i><input type="password" id="loginPassword" placeholder="Password"/></div>
+        <div class="input-group">
+          <i class="fa fa-envelope"></i>
+          <input type="email" id="loginEmail" placeholder="your@email.com" />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-lock"></i>
+          <input type="password" id="loginPassword" placeholder="Password" />
+        </div>
         <button class="btn-primary" onclick="handleLogin()">Enter the Garden</button>
         <p class="switch-form">New here? <span onclick="showSignup()">Create account</span></p>
         <div class="demo-hint">✨ Try: any email + any password</div>
@@ -37,9 +43,18 @@
       <div class="login-card hidden" id="signupCard">
         <h2>Join Verdana</h2>
         <p class="login-sub">Start your plant journey today</p>
-        <div class="input-group"><i class="fa fa-user"></i><input type="text" id="signupName" placeholder="Your name"/></div>
-        <div class="input-group"><i class="fa fa-envelope"></i><input type="email" id="signupEmail" placeholder="your@email.com"/></div>
-        <div class="input-group"><i class="fa fa-lock"></i><input type="password" id="signupPassword" placeholder="Create password"/></div>
+        <div class="input-group">
+          <i class="fa fa-user"></i>
+          <input type="text" id="signupName" placeholder="Your name" />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-envelope"></i>
+          <input type="email" id="signupEmail" placeholder="your@email.com" />
+        </div>
+        <div class="input-group">
+          <i class="fa fa-lock"></i>
+          <input type="password" id="signupPassword" placeholder="Create password" />
+        </div>
         <button class="btn-primary" onclick="handleSignup()">Grow With Us 🌱</button>
         <p class="switch-form">Already a member? <span onclick="showLogin()">Sign in</span></p>
       </div>
@@ -49,13 +64,13 @@
   <!-- ===== MAIN APP ===== -->
   <div id="mainApp" class="main-app hidden">
 
-    <!-- SIDEBAR -->
+    <!-- SIDEBAR NAV -->
     <nav class="sidebar" id="sidebar">
       <div class="sidebar-brand">
         <span class="brand-leaf">🌿</span>
         <span class="brand-name">Verdana</span>
       </div>
-      <div class="user-pill">
+      <div class="user-pill" id="userPill">
         <div class="user-avatar" id="userAvatar">J</div>
         <div class="user-info">
           <span class="user-name" id="sidebarUserName">Jiya</span>
@@ -63,12 +78,32 @@
         </div>
       </div>
       <ul class="nav-links">
-        <li class="nav-item active" data-tab="home" onclick="switchTab('home',this)"><i class="fa fa-seedling"></i><span>Dashboard</span></li>
-        <li class="nav-item" data-tab="identify" onclick="switchTab('identify',this)"><i class="fa fa-camera"></i><span>Identify Plant</span></li>
-        <li class="nav-item" data-tab="myplants" onclick="switchTab('myplants',this)"><i class="fa fa-leaf"></i><span>My Plants</span><span class="nav-badge" id="plantCount">0</span></li>
-        <li class="nav-item" data-tab="calendar" onclick="switchTab('calendar',this)"><i class="fa fa-calendar-alt"></i><span>Care Calendar</span></li>
-        <li class="nav-item" data-tab="encyclopedia" onclick="switchTab('encyclopedia',this)"><i class="fa fa-book-open"></i><span>Encyclopedia</span></li>
-        <li class="nav-item" data-tab="history" onclick="switchTab('history',this)"><i class="fa fa-history"></i><span>History</span></li>
+        <li class="nav-item active" data-tab="home" onclick="switchTab('home', this)">
+          <i class="fa fa-seedling"></i><span>Dashboard</span>
+        </li>
+        <li class="nav-item" data-tab="identify" onclick="switchTab('identify', this)">
+          <i class="fa fa-camera"></i><span>Identify Plant</span>
+        </li>
+        <li class="nav-item" data-tab="myplants" onclick="switchTab('myplants', this)">
+          <i class="fa fa-leaf"></i><span>My Plants</span>
+          <span class="nav-badge" id="plantCount">0</span>
+        </li>
+        <li class="nav-item" data-tab="calendar" onclick="switchTab('calendar', this)">
+          <i class="fa fa-calendar-alt"></i><span>Care Calendar</span>
+        </li>
+        <li class="nav-item" data-tab="lightmeter" onclick="switchTab('lightmeter', this)">
+          <i class="fa fa-sun"></i><span>Light Meter</span>
+          <span class="nav-badge new">NEW</span>
+        </li>
+        <li class="nav-item" data-tab="encyclopedia" onclick="switchTab('encyclopedia', this)">
+          <i class="fa fa-book-open"></i><span>Encyclopedia</span>
+        </li>
+        <li class="nav-item" data-tab="history" onclick="switchTab('history', this)">
+          <i class="fa fa-history"></i><span>History</span>
+        </li>
+        <li class="nav-item" data-tab="guide" onclick="switchTab('guide', this)">
+          <i class="fa fa-compass"></i><span>How To Use</span>
+        </li>
       </ul>
       <button class="logout-btn" onclick="logout()"><i class="fa fa-sign-out-alt"></i> Logout</button>
     </nav>
@@ -83,31 +118,73 @@
     <!-- MAIN CONTENT -->
     <main class="content-area">
 
-      <!-- TAB: HOME -->
+      <!-- ===== TAB: HOME ===== -->
       <section id="tab-home" class="tab-section active">
-        <div class="welcome-strip">
-          <div class="welcome-text">
-            <span class="welcome-label">YOUR GARDEN STUDIO</span>
-            <h1 class="welcome-title">Your Plants,<br/><em>Beautifully Cared For</em></h1>
-            <p class="welcome-sub">Track, nurture and grow your indoor garden with AI-powered care.</p>
+        <!-- Magazine Hero -->
+        <div class="hero-magazine">
+          <div class="hero-text-block">
+            <span class="hero-label">FEATURED THIS SEASON</span>
+            <h1 class="hero-title">Your Plants,<br/><em>Beautifully Cared For</em></h1>
+            <p class="hero-sub">Track, nurture, and grow your indoor garden with Verdana's intelligent care system.</p>
+            <div class="hero-actions">
+              <button class="btn-primary" onclick="switchTab('identify', document.querySelector('[data-tab=identify]'))">Identify a Plant 📸</button>
+              <button class="btn-ghost" onclick="switchTab('encyclopedia', document.querySelector('[data-tab=encyclopedia]'))">Browse Plants</button>
+            </div>
           </div>
-          <div class="welcome-actions">
-            <button class="btn-primary" onclick="switchTab('identify',document.querySelector('[data-tab=identify]'))">Identify a Plant 📸</button>
-            <button class="btn-ghost" onclick="switchTab('encyclopedia',document.querySelector('[data-tab=encyclopedia]'))">Browse Plants</button>
+          <div class="hero-image-block">
+            <div class="hero-plant-card">
+              <div class="plant-emoji-big">🪴</div>
+              <div class="hero-plant-info">
+                <span>Trending</span>
+                <h3>Monstera Deliciosa</h3>
+                <p>Bright Indirect Light · Water Weekly</p>
+              </div>
+            </div>
+            <div class="hero-stat-pill pill-1"><i class="fa fa-droplet"></i> Water Today: 2</div>
+            <div class="hero-stat-pill pill-2"><i class="fa fa-sun"></i> Light: Bright</div>
+            <div class="hero-stat-pill pill-3"><i class="fa fa-seedling"></i> Healthy</div>
           </div>
         </div>
+
+        <!-- Quick Stats -->
         <div class="stats-row">
-          <div class="stat-card"><div class="stat-icon">🌿</div><div class="stat-info"><span class="stat-num" id="totalPlants">0</span><span class="stat-label">My Plants</span></div></div>
-          <div class="stat-card"><div class="stat-icon">💧</div><div class="stat-info"><span class="stat-num" id="waterToday">0</span><span class="stat-label">Water Today</span></div></div>
-          <div class="stat-card"><div class="stat-icon">✅</div><div class="stat-info"><span class="stat-num" id="tasksToday">0</span><span class="stat-label">Tasks Done</span></div></div>
-          <div class="stat-card"><div class="stat-icon">🔍</div><div class="stat-info"><span class="stat-num" id="identified">0</span><span class="stat-label">Identified</span></div></div>
+          <div class="stat-card">
+            <div class="stat-icon">🌿</div>
+            <div class="stat-info"><span class="stat-num" id="totalPlants">0</span><span class="stat-label">My Plants</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">💧</div>
+            <div class="stat-info"><span class="stat-num" id="waterToday">0</span><span class="stat-label">Water Today</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-info"><span class="stat-num" id="tasksToday">0</span><span class="stat-label">Tasks Done</span></div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-icon">🔍</div>
+            <div class="stat-info"><span class="stat-num" id="identified">0</span><span class="stat-label">Identified</span></div>
+          </div>
+        </div>
+
+        <!-- Pinterest Masonry Grid -->
+        <div class="section-header">
+          <h2>Explore Plants</h2>
+          <p>Add any to your collection</p>
+        </div>
+        <div class="masonry-grid" id="masonryGrid">
+          <!-- Populated by JS -->
         </div>
       </section>
 
-      <!-- TAB: IDENTIFY -->
+      <!-- ===== TAB: IDENTIFY ===== -->
       <section id="tab-identify" class="tab-section">
-        <div class="page-header"><h2>🔍 Identify Your Plant</h2><p>Upload a photo and get an AI-powered care guide instantly</p></div>
+        <div class="page-header">
+          <h2>🔍 Identify Your Plant</h2>
+          <p>Upload a photo and we'll ask a few questions to give you perfect care tips</p>
+        </div>
+
         <div class="identify-layout">
+          <!-- Step 1: Upload -->
           <div class="identify-card" id="step1Card">
             <div class="step-badge">Step 1</div>
             <h3>Upload a Photo</h3>
@@ -120,13 +197,61 @@
               <img id="uploadPreview" class="upload-preview hidden" alt="Plant preview"/>
             </div>
             <input type="file" id="plantImageInput" accept="image/*" onchange="handleImageUpload(event)" style="display:none"/>
-            <button class="btn-primary mt" id="analyzeBtn" onclick="getCareGuide()" disabled>Analyze Plant 🌿</button>
+            <button class="btn-primary mt" id="analyzeBtn" onclick="startIdentification()" disabled>Analyze Plant 🌿</button>
           </div>
+
+          <!-- Step 2: Questions -->
+          <div class="identify-card hidden" id="step2Card">
+            <div class="step-badge">Step 2</div>
+            <h3>A Few Quick Questions</h3>
+            <p class="step-sub">This helps us give you the most accurate care guide</p>
+            <div id="questionsArea">
+              <div class="question-item">
+                <label>Where is this plant located?</label>
+                <div class="radio-group">
+                  <label class="radio-btn"><input type="radio" name="location" value="indoors"/> 🏠 Indoors</label>
+                  <label class="radio-btn"><input type="radio" name="location" value="outdoors"/> 🌳 Outdoors</label>
+                  <label class="radio-btn"><input type="radio" name="location" value="balcony"/> 🌇 Balcony</label>
+                </div>
+              </div>
+              <div class="question-item">
+                <label>How much sunlight does the spot get?</label>
+                <div class="radio-group">
+                  <label class="radio-btn"><input type="radio" name="sunlight" value="full_sun"/> ☀️ Full Sun</label>
+                  <label class="radio-btn"><input type="radio" name="sunlight" value="partial"/> 🌤 Partial</label>
+                  <label class="radio-btn"><input type="radio" name="sunlight" value="low_light"/> 🌑 Low Light</label>
+                </div>
+              </div>
+              <div class="question-item">
+                <label>What's your climate like?</label>
+                <div class="radio-group">
+                  <label class="radio-btn"><input type="radio" name="climate" value="tropical"/> 🌴 Tropical/Humid</label>
+                  <label class="radio-btn"><input type="radio" name="climate" value="dry"/> 🏜️ Dry/Arid</label>
+                  <label class="radio-btn"><input type="radio" name="climate" value="temperate"/> 🌿 Temperate</label>
+                </div>
+              </div>
+              <div class="question-item">
+                <label>How experienced are you with plants?</label>
+                <div class="radio-group">
+                  <label class="radio-btn"><input type="radio" name="experience" value="beginner"/> 🌱 Beginner</label>
+                  <label class="radio-btn"><input type="radio" name="experience" value="intermediate"/> 🌿 Intermediate</label>
+                  <label class="radio-btn"><input type="radio" name="experience" value="expert"/> 🌳 Expert</label>
+                </div>
+              </div>
+            </div>
+            <button class="btn-primary mt" onclick="getCareGuide()">Get My Care Guide 🌸</button>
+            <button class="btn-ghost mt" onclick="resetIdentify()">← Start Over</button>
+          </div>
+
+          <!-- Step 3: Results -->
           <div class="identify-card hidden" id="step3Card">
-            <div class="step-badge">Your Care Guide</div>
-            <h3>Plant Analysis Result</h3>
+            <div class="step-badge">Step 3</div>
+            <h3>Your Plant Care Guide</h3>
             <div id="careGuideResult" class="care-guide-result">
-              <div class="loading-plant"><div class="spinner"></div><p>Analyzing your plant...</p></div>
+              <div class="loading-plant">
+                <div class="spinner"></div>
+                <p>Analyzing your plant...</p>
+              </div>
             </div>
             <div class="result-actions hidden" id="resultActions">
               <button class="btn-primary" onclick="saveToMyPlants()">💚 Save to My Plants</button>
@@ -136,21 +261,27 @@
         </div>
       </section>
 
-      <!-- TAB: MY PLANTS -->
+      <!-- ===== TAB: MY PLANTS ===== -->
       <section id="tab-myplants" class="tab-section">
-        <div class="page-header"><h2>🌿 My Plant Collection</h2><p>Your personal green sanctuary</p></div>
+        <div class="page-header">
+          <h2>🌿 My Plant Collection</h2>
+          <p>Your personal green sanctuary</p>
+        </div>
         <div id="emptyPlants" class="empty-state">
           <div class="empty-icon">🪴</div>
           <h3>Your garden is empty</h3>
-          <p>Identify a plant or browse the Encyclopedia to get started</p>
-          <button class="btn-primary" onclick="switchTab('identify',document.querySelector('[data-tab=identify]'))">Add Your First Plant</button>
+          <p>Identify a plant or add from the Encyclopedia to get started</p>
+          <button class="btn-primary" onclick="switchTab('identify', document.querySelector('[data-tab=identify]'))">Add Your First Plant</button>
         </div>
         <div class="plants-grid" id="myPlantsGrid"></div>
       </section>
 
-      <!-- TAB: CALENDAR -->
+      <!-- ===== TAB: CALENDAR ===== -->
       <section id="tab-calendar" class="tab-section">
-        <div class="page-header"><h2>📅 Plant Care Calendar</h2><p>Never miss a watering or care task</p></div>
+        <div class="page-header">
+          <h2>📅 Plant Care Calendar</h2>
+          <p>Never miss a watering or care task</p>
+        </div>
         <div class="calendar-layout">
           <div class="calendar-main">
             <div class="cal-nav">
@@ -158,14 +289,21 @@
               <h3 id="calMonthTitle">May 2026</h3>
               <button onclick="changeMonth(1)"><i class="fa fa-chevron-right"></i></button>
             </div>
-            <div class="cal-weekdays"><span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span></div>
+            <div class="cal-weekdays">
+              <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+            </div>
             <div class="cal-grid" id="calGrid"></div>
           </div>
           <div class="calendar-sidebar">
-            <div class="cal-today-card"><h4>Today's Tasks</h4><div id="todayTasks" class="tasks-list"></div></div>
+            <div class="cal-today-card">
+              <h4>Today's Tasks</h4>
+              <div id="todayTasks" class="tasks-list"></div>
+            </div>
             <div class="add-task-form">
               <h4>Add Care Task</h4>
-              <select id="taskPlantSelect" class="cal-select"><option value="">Select plant...</option></select>
+              <select id="taskPlantSelect" class="cal-select">
+                <option value="">Select plant...</option>
+              </select>
               <select id="taskType" class="cal-select">
                 <option value="water">💧 Water</option>
                 <option value="fertilize">🌱 Fertilize</option>
@@ -181,24 +319,91 @@
         </div>
       </section>
 
-      <!-- TAB: ENCYCLOPEDIA -->
+      <!-- ===== TAB: LIGHT METER ===== -->
+      <section id="tab-lightmeter" class="tab-section">
+        <div class="page-header">
+          <h2>☀️ Smart Light Meter</h2>
+          <p>Simulate the light level in any room and get plant recommendations</p>
+        </div>
+        <div class="lightmeter-layout">
+          <div class="meter-card">
+            <div class="meter-title">Room Light Scanner</div>
+            <div class="meter-visual" id="meterVisual">
+              <div class="meter-sun">☀️</div>
+              <div class="meter-ring" id="meterRing">
+                <div class="meter-needle" id="meterNeedle"></div>
+              </div>
+              <div class="meter-value" id="meterValue">--</div>
+              <div class="meter-label" id="meterLabel">Select room type to scan</div>
+            </div>
+            <div class="room-selector">
+              <h4>Select Your Room Type</h4>
+              <div class="room-grid">
+                <button class="room-btn" onclick="runLightScan('south_window')">🪟 South Window</button>
+                <button class="room-btn" onclick="runLightScan('north_window')">🌑 North Window</button>
+                <button class="room-btn" onclick="runLightScan('open_garden')">🌳 Open Garden</button>
+                <button class="room-btn" onclick="runLightScan('dark_corner')">🖤 Dark Corner</button>
+                <button class="room-btn" onclick="runLightScan('bright_room')">✨ Bright Room</button>
+                <button class="room-btn" onclick="runLightScan('shaded_balcony')">🌇 Shaded Balcony</button>
+              </div>
+            </div>
+            <div class="scan-result hidden" id="scanResult">
+              <div class="scan-badge" id="scanBadge"></div>
+              <p id="scanDesc"></p>
+              <div class="scan-plants" id="scanPlants"></div>
+            </div>
+          </div>
+          <div class="light-guide-card">
+            <h3>Light Level Guide</h3>
+            <div class="light-levels">
+              <div class="light-level-row">
+                <span class="ll-dot bright-direct"></span>
+                <div><strong>Bright Direct (6000+ lux)</strong><p>Full sun outdoors, south windows</p></div>
+              </div>
+              <div class="light-level-row">
+                <span class="ll-dot bright-indirect"></span>
+                <div><strong>Bright Indirect (1000–6000)</strong><p>Near windows with filtered light</p></div>
+              </div>
+              <div class="light-level-row">
+                <span class="ll-dot medium"></span>
+                <div><strong>Medium Light (200–1000)</strong><p>A few feet from windows</p></div>
+              </div>
+              <div class="light-level-row">
+                <span class="ll-dot low"></span>
+                <div><strong>Low Light (20–200)</strong><p>Dimly lit rooms, north-facing</p></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== TAB: ENCYCLOPEDIA ===== -->
       <section id="tab-encyclopedia" class="tab-section">
-        <div class="page-header"><h2>📖 Plant Encyclopedia</h2><p>Explore and learn about plants</p></div>
-        <div class="enc-search-bar"><i class="fa fa-search"></i><input type="text" id="encSearch" placeholder="Search plants by name, light, or difficulty..." oninput="filterEncyclopedia()"/></div>
+        <div class="page-header">
+          <h2>📖 Plant Encyclopedia</h2>
+          <p>Explore and learn about plants</p>
+        </div>
+        <div class="enc-search-bar">
+          <i class="fa fa-search"></i>
+          <input type="text" id="encSearch" placeholder="Search plants by name, light, or difficulty..." oninput="filterEncyclopedia()"/>
+        </div>
         <div class="enc-filters">
-          <button class="filter-btn active" onclick="filterEnc('all',this)">All</button>
-          <button class="filter-btn" onclick="filterEnc('easy',this)">🌱 Easy</button>
-          <button class="filter-btn" onclick="filterEnc('medium',this)">🌿 Medium</button>
-          <button class="filter-btn" onclick="filterEnc('hard',this)">🌳 Advanced</button>
-          <button class="filter-btn" onclick="filterEnc('low_light',this)">🌑 Low Light</button>
-          <button class="filter-btn" onclick="filterEnc('succulent',this)">🌵 Succulents</button>
+          <button class="filter-btn active" onclick="filterEnc('all', this)">All</button>
+          <button class="filter-btn" onclick="filterEnc('easy', this)">🌱 Easy</button>
+          <button class="filter-btn" onclick="filterEnc('medium', this)">🌿 Medium</button>
+          <button class="filter-btn" onclick="filterEnc('hard', this)">🌳 Advanced</button>
+          <button class="filter-btn" onclick="filterEnc('low_light', this)">🌑 Low Light</button>
+          <button class="filter-btn" onclick="filterEnc('succulent', this)">🌵 Succulents</button>
         </div>
         <div class="enc-grid" id="encGrid"></div>
       </section>
 
-      <!-- TAB: HISTORY -->
+      <!-- ===== TAB: HISTORY ===== -->
       <section id="tab-history" class="tab-section">
-        <div class="page-header"><h2>📜 Care History</h2><p>Track everything you've done for your plants</p></div>
+        <div class="page-header">
+          <h2>📜 Care History</h2>
+          <p>Track everything you've done for your plants</p>
+        </div>
         <div id="emptyHistory" class="empty-state">
           <div class="empty-icon">📋</div>
           <h3>No history yet</h3>
@@ -207,6 +412,63 @@
         <div class="history-timeline" id="historyTimeline"></div>
         <div class="history-footer hidden" id="historyFooter">
           <button class="btn-ghost" onclick="clearHistory()"><i class="fa fa-trash"></i> Clear All History</button>
+        </div>
+      </section>
+
+      <!-- ===== TAB: GUIDE ===== -->
+      <section id="tab-guide" class="tab-section">
+        <div class="page-header">
+          <h2>🧭 How to Use Verdana</h2>
+          <p>Everything you need to know to get started</p>
+        </div>
+        <div class="guide-grid">
+          <div class="guide-card">
+            <div class="guide-step">01</div>
+            <div class="guide-icon">📸</div>
+            <h3>Identify Your Plant</h3>
+            <p>Head to the <strong>Identify Plant</strong> tab, upload a photo of any plant. Answer 4 quick questions about your environment and experience — and receive a personalized care guide powered by AI.</p>
+          </div>
+          <div class="guide-card">
+            <div class="guide-step">02</div>
+            <div class="guide-icon">💚</div>
+            <h3>Build Your Collection</h3>
+            <p>Save identified plants or browse the <strong>Encyclopedia</strong> to add plants to <strong>My Plants</strong>. Each plant has its own detailed care profile with watering, light, soil and fertilizer info.</p>
+          </div>
+          <div class="guide-card">
+            <div class="guide-step">03</div>
+            <div class="guide-icon">📅</div>
+            <h3>Use the Care Calendar</h3>
+            <p>Add watering, fertilizing, pruning tasks to your <strong>Calendar</strong>. The calendar automatically highlights task days so you never forget your plant's needs.</p>
+          </div>
+          <div class="guide-card">
+            <div class="guide-step">04</div>
+            <div class="guide-icon">☀️</div>
+            <h3>Scan Room Light</h3>
+            <p>Use the <strong>Light Meter</strong> to simulate your room's light level. Select your window type and get instant plant recommendations for that exact spot in your home.</p>
+          </div>
+          <div class="guide-card">
+            <div class="guide-step">05</div>
+            <div class="guide-icon">🤖</div>
+            <h3>Chat with Verdana AI</h3>
+            <p>The <strong>chatbot</strong> (bottom right) is your personal plant expert! Ask it anything — "Why are my leaves turning yellow?", "How often to water a cactus?", or "Best plant for a dark room?"</p>
+          </div>
+          <div class="guide-card">
+            <div class="guide-step">06</div>
+            <div class="guide-icon">📜</div>
+            <h3>Track Your History</h3>
+            <p>Every action you take — identifying plants, saving them, completing tasks — is logged in your <strong>History</strong> tab. You can review or clear it anytime.</p>
+          </div>
+        </div>
+        <div class="tips-section">
+          <h3>💡 Pro Tips</h3>
+          <div class="tips-grid">
+            <div class="tip-pill">🌿 Most indoor plants prefer bright indirect light, not direct sun</div>
+            <div class="tip-pill">💧 Overwatering is the #1 cause of plant death — check soil first</div>
+            <div class="tip-pill">🌡️ Keep plants away from heating/cooling vents</div>
+            <div class="tip-pill">🌱 Spring & summer = growing season, reduce care in winter</div>
+            <div class="tip-pill">✂️ Remove dead leaves to redirect energy to healthy growth</div>
+            <div class="tip-pill">🪴 Only repot when roots are visibly escaping the drainage holes</div>
+          </div>
         </div>
       </section>
 
@@ -220,13 +482,16 @@
     <div class="chatbot-panel" id="chatbotPanel">
       <div class="chat-header">
         <div class="chat-avatar">🌿</div>
-        <div class="chat-info"><span class="chat-name">Verdana AI</span><span class="chat-status">Plant Expert · Always Here</span></div>
+        <div class="chat-info">
+          <span class="chat-name">Verdana AI</span>
+          <span class="chat-status">Plant Expert · Always Here</span>
+        </div>
         <button class="chat-close" onclick="toggleChatbot()"><i class="fa fa-times"></i></button>
       </div>
       <div class="chat-messages" id="chatMessages">
         <div class="chat-msg bot">
           <div class="msg-avatar">🌿</div>
-          <div class="msg-bubble">Hey there! 🌱 I'm Verdana's plant care AI. Ask me anything about your plants — care tips, yellowing leaves, watering schedules and more!</div>
+          <div class="msg-bubble">Hey there! 🌱 I'm Verdana's plant care AI. Ask me anything about your plants — from care tips to troubleshooting yellowing leaves!</div>
         </div>
         <div class="chat-suggestions">
           <button class="sugg-btn" onclick="sendSuggestion('Why are my leaves turning yellow?')">Yellowing leaves?</button>
@@ -240,7 +505,7 @@
       </div>
     </div>
 
-    <!-- PLANT MODAL -->
+    <!-- PLANT DETAIL MODAL -->
     <div class="modal-overlay hidden" id="plantModal">
       <div class="modal-card" id="modalContent">
         <button class="modal-close" onclick="closeModal()"><i class="fa fa-times"></i></button>
